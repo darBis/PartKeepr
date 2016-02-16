@@ -46,6 +46,7 @@ Ext.define('PartKeepr.PartFilterPanel', {
     manufacturerFilter: null,
     distributorFilterCombo: null,
     distributorFilter: null,
+	distributorSKUFilter: null,
     footprintFilterCheckbox: null,
     footprintFilterCombo: null,
     footprintFilter: null,
@@ -91,6 +92,7 @@ Ext.define('PartKeepr.PartFilterPanel', {
                 this.stockFilter,
                 this.distributorOrderNumberFilter,
                 this.distributorFilter,
+                this.distributorSKUFilter,
                 this.manufacturerFilter,
                 this.manufacturerPartNumberFilter,
                 this.footprintFilter,
@@ -163,6 +165,7 @@ Ext.define('PartKeepr.PartFilterPanel', {
         this.categoryFilter.setValue({category: 'all'});
         this.stockFilter.setValue({stock: 'any'});
         this.distributorOrderNumberFilter.setValue("");
+        this.distributorSKUFilter.setValue("");
         this.manufacturerPartNumberFilter.setValue("");
 
         this.createDateFilterSelect.setValue("");
@@ -282,6 +285,10 @@ Ext.define('PartKeepr.PartFilterPanel', {
 
         this.distributorOrderNumberFilter = Ext.create("Ext.form.field.Text", {
             fieldLabel: i18n("Order Number"),
+            anchor: '100%'
+        });
+		this.distributorSKUFilter = Ext.create("Ext.form.field.Text", {
+            fieldLabel: i18n("SKU"),
             anchor: '100%'
         });
 
@@ -541,6 +548,13 @@ Ext.define('PartKeepr.PartFilterPanel', {
         if (this.distributorOrderNumberFilter.getValue() !== "") {
             filters.push(Ext.create("Ext.util.Filter", {
                 property: 'distributors.orderNumber',
+                operator: "LIKE",
+                value: "%" + this.distributorOrderNumberFilter.getValue() + "%"
+            }));
+        }
+		if (this.distributorSKUFilter.getValue() !== "") {
+            filters.push(Ext.create("Ext.util.Filter", {
+                property: 'distributors.sku',
                 operator: "LIKE",
                 value: "%" + this.distributorOrderNumberFilter.getValue() + "%"
             }));
