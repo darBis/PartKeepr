@@ -556,7 +556,7 @@ Ext.define('PartKeepr.PartFilterPanel', {
             filters.push(Ext.create("Ext.util.Filter", {
                 property: 'distributors.sku',
                 operator: "LIKE",
-                value: "%" + this.distributorOrderNumberFilter.getValue() + "%"
+                value: "%" + this.distributorSKUFilter.getValue() + "%"
             }));
         }
 
