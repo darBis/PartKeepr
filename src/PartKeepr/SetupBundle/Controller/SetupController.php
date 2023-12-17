@@ -69,10 +69,10 @@ class SetupController extends SetupBaseController
             // We are running mariadb. This could cause problems.
             $major = $matches[1];
             $minor = $matches[2];
-            if ($major == 10 && $minor >= 2) {
+            if ($major == 10 && $minor >= 12) {
                 $response['success'] = false;
                 $response['message'] = 'Incompatible MariaDB version';
-                $response['errors'] = ['Current dependency Symfony is incompatible with MariaDB >= 10.2.'];
+                $response['errors'] = ['Current dependency Symfony is incompatible with MariaDB >= 10.12.'];
 
                 return new JsonResponse($response);
             }
